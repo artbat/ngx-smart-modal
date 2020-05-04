@@ -91,11 +91,33 @@ export class MainComponent implements AfterViewInit {
       backdrop: false
     };
 
-    this.ngxSmartModalService.create('dynamicModal1', 'Hello, I\'m a simple text !').open();
+    // this.ngxSmartModalService.create('dynamicModal1', 'Hello, I\'m a simple text !').open();
 
     this.ngxSmartModalService.create('dynamicModal2', FakeComponent, opts).open();
 
-    this.ngxSmartModalService.create('dynamicModal3', this.tpl, opts).open();
+    // this.ngxSmartModalService.create('dynamicModal3', this.tpl, opts).open();
+  
+    setTimeout(()=>{
+      const onClosedSub = this.ngxSmartModalService.getModal('dynamicModal2').onClose.subscribe((modal: NgxSmartModalComponent) => {
+        console.log('Modal closed!', modal);
+        closeSubs();
+      });
+      
+      const onDismissedSub = this.ngxSmartModalService.getModal('dynamicModal2').onDismiss.subscribe((modal: NgxSmartModalComponent) => {
+        console.log('Modal dismissed!', modal);
+        closeSubs();
+      });
+      const onEscapedSub = this.ngxSmartModalService.getModal('dynamicModal2').onEscape.subscribe((modal: NgxSmartModalComponent) => {
+        console.log('Modal escaped!', modal);
+        closeSubs();
+      });
+      
+      const closeSubs = () => {
+        onClosedSub.unsubscribe();
+        onDismissedSub.unsubscribe();
+        onEscapedSub.unsubscribe();
+      }
+    }, 10);
   }
 
 }

@@ -11,7 +11,8 @@ import { LazyModalComponent } from "./lazy-modal/lazy-modal.component";
 })
 export class FeatureComponent implements AfterViewInit {
   version = VERSION.full;
-
+  
+  classicModal = undefined;
   // tslint:disable:max-line-length
   sampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper neque ac ullamcorper scelerisque. Proin molestie erat sapien, ac dapibus tortor placerat a. Vivamus quis tempor mauris. Ut porta ultricies nisi in eleifend';
 
@@ -30,8 +31,7 @@ export class FeatureComponent implements AfterViewInit {
   
     // this.ngxSmartModalService.create('dynamicModal1', 'Hello, I\'m a simple text !').open();
   
-    this.ngxSmartModalService.create('dynamicModalLazy', LazyModalComponent, opts).open();
-    
+    this.classicModal = this.ngxSmartModalService.create('classicModal', LazyModalComponent, opts);
   }
 
 }

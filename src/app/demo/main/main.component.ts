@@ -85,18 +85,22 @@ export class MainComponent implements AfterViewInit {
   goAutoStart() {
     this.router.navigate(['demo/autostart']);
   }
-
+  
+  /**
+   * 2 pruebas:
+   * - Abrir un modal instanciando dinámicamente un componente.
+   * - Controlar el cierre mos el cierre según se haya pulsado ESC, el fondo que no es el modal o el botón de cierre.
+   *
+   * ESTO ES RELEVANTE: en analítica a veces se pide saber las diferentes causas del cierre.
+   */
   goNewDynamic() {
     const opts: INgxSmartModalOptions = {
       backdrop: false
     };
 
-    // this.ngxSmartModalService.create('dynamicModal1', 'Hello, I\'m a simple text !').open();
-
     this.ngxSmartModalService.create('dynamicModal2', FakeComponent, opts).open();
-
-    // this.ngxSmartModalService.create('dynamicModal3', this.tpl, opts).open();
   
+    // No está disponible el modal inmediatamente. Esto no es problema al aplicarlo a nuestras apps
     setTimeout(()=>{
       const onClosedSub = this.ngxSmartModalService.getModal('dynamicModal2').onClose.subscribe((modal: NgxSmartModalComponent) => {
         console.log('Modal closed!', modal);
@@ -112,6 +116,7 @@ export class MainComponent implements AfterViewInit {
         closeSubs();
       });
       
+      // Fundamental cerrar la subscripción al cerrarse el modal
       const closeSubs = () => {
         onClosedSub.unsubscribe();
         onDismissedSub.unsubscribe();

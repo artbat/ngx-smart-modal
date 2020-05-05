@@ -24,8 +24,6 @@
             Open modal remotely
         </button>
         <button class="button -regular"
-                (click)="goFeature()">Lazy load feature module</button>
-        <button class="button -regular"
                 (click)="undismissable.open()">Undismissable modal</button>
         <button class="button -regular"
                 (click)="inescapable.open()">Inescapable modal</button>
@@ -35,8 +33,6 @@
                 id="targetElement"
                 (click)="customTarget.open()"
                 style="position:absolute;top: 300px;left: 900px;">Custom target modal</button>
-        <button class="button -regular"
-                (click)="goNewDynamic()">Create dynamic modal<span>new</span></button>
     </div>
 
     <h3 class="title">Examples with CSS frameworks</h3>
@@ -50,6 +46,15 @@
         <button class="button -regular"
                 (click)="goFoundation()">Foundation Modal</button>
     </div>
+
+    <h3 class="title">Pruebas de Arturo</h3>
+    <p class="small-p">⚠️ Ejemplo de control de que es posible saber cómo se ha cerrado el modal (importa en analítica)</p>
+    <button class="button -regular"
+            (click)="goNewDynamic()">Modal instanciado desde un componente</button>
+
+    <p class="small-p">⚠️ Ejemplo de carga de un módulo lazy-loaded con un modal definido en ese módulo, cosa que nunca se pudo hacer con Toppy</p>
+    <button class="button -regular"
+            (click)="goFeature()">Modal en modulo lazy-loaded</button>
 
     <footer class="footer">
         <div class="go-back-doc">
